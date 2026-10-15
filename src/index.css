@@ -1,0 +1,65 @@
+body {
+  background: #181818;
+  color: #ccc;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header img.poster {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.episodes {
+  display: grid;
+  place-items: start;
+  place-content: center;
+  gap: 1rem;
+}
+
+.season {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.season-header,
+.episode {
+  --size: 2.2rem;
+  width: var(--size);
+  height: var(--size);
+  background: var(--color, #333);
+  display: grid;
+  place-items: center;
+  margin: 2px;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.season-header {
+  background: #444;
+  font-size: 0.75rem;
+}
+
+/* Colores de valoración (rating) */
+.rating-0  { --color: #2b0a27; }
+.rating-1  { --color: #451010; }
+.rating-2  { --color: #922323; }
+.rating-3,
+.rating-4,
+.rating-5  { --color: #c53030; }
+.rating-6  { --color: #dd6b20; }
+.rating-7  { --color: #f6e05e; color: #333; }
+.rating-8  { --color: #48bb78; }
+.rating-9  { --color: #2f855a; }
+.rating-10 { --color: #4CAF50; }
