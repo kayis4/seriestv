@@ -1,0 +1,10 @@
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=`https://placehold.co/210x295`,t=async t=>{let n=`https://api.tvmaze.com/shows/${t}`,r=await fetch(n);if(!r.ok)throw Error(`Error HTTP: ${r.status}`);let i=await r.json();return{name:i.name,rating:i.rating?.average,image:i.image?.medium??e}},n=async e=>{let t=`https://api.tvmaze.com/shows/${e}/episodes`,n=await fetch(t);if(!n.ok)throw Error(`Error HTTP: ${n.status}`);let r=(await n.json()).map(e=>({number:e.number,season:e.season,rating:e.rating?.average??0}));return Object.groupBy(r,e=>e.season)},r=`2993`,i=document.querySelector(`header`),a=document.querySelector(`.episodes`);try{let e=await t(r),o=await n(r);i.innerHTML=`
+    <img class="poster" src="${e.image}" alt="${e.name}" />
+    <h1>${e.name}</h1>
+    <p>Valoración media: ${e.rating??`N/A`}</p>
+  `;let s=e=>`<div class="episode rating-${Math.floor(e.rating||0)}" title="Episodio ${e.number} (Nota: ${e.rating})">${e.number}</div>`,c=(e,t)=>`
+      <article class="season">
+        <div class="season-header">T${t}</div>
+        ${e.map(s).join(``)}
+      </article>
+    `;a.innerHTML=Object.values(o).map((e,t)=>c(e,t+1)).join(``)}catch(e){console.error(`Hubo un error al cargar la serie:`,e)}
